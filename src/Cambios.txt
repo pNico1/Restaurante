@@ -1,0 +1,12 @@
+Categoria:
+    -obtenerPlatos() (atributo) --> +getPlatos  (metodo)
+
+Cupon:
+    validarCupon --> isValido
+
+Pago:
+    validarCupon --> aplicarCupon
+
+Usuario:
+    modificarPedido --> agregarAlPedido, removerDelPedido
+
