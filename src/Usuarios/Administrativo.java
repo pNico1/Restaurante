@@ -1,5 +1,7 @@
 package Usuarios;
 
+import PedidosClases.ModificadorPedido;
+
 public class Administrativo extends Usuario {
     public Administrativo(String nombre) {
         super(nombre);
@@ -8,7 +10,6 @@ public class Administrativo extends Usuario {
     @Override
     public void modificarPedido(ModificadorPedido modificador) {
         modificador.cambiarEstado();
-
 
     }
 }

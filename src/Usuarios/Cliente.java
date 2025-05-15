@@ -1,24 +1,25 @@
 package Usuarios;
 
+import Notificaciones.TipoMedioNotificaciones;
+import RestauranteClases.Categoria;
+import RestauranteClases.Menu;
+import RestauranteClases.Plato;
+
 public class Cliente {
     private String nombre;
-    private Mail email;
     private String telefono;
-    private UserApp userApp;
+    private TipoMedioNotificaciones tipoMedioNotificaciones;
 
-    public Cliente(String nombre, Mail email, String telefono) {
+    public Cliente(String nombre, TipoMedioNotificaciones tipoMedioNotificaciones, String telefono) {
         this.nombre = nombre;
-        this.email = email;
+        this.tipoMedioNotificaciones = tipoMedioNotificaciones;
         this.telefono = telefono;
     }
-    public Cliente(String nombre, UserApp userApp, String telefono) {
-        this.nombre = nombre;
-        this.userApp = userApp;
-        this.telefono = telefono;
-    }
+
+
+    public TipoMedioNotificaciones getTipoMedioNotificaCiones() { return tipoMedioNotificaciones; }
 
     public String getNombre() { return nombre; }
-    public String getEmail() { return email.getEmail(); }
     public String getTelefono() { return telefono; }
 
 }

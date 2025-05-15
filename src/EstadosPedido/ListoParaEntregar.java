@@ -1,5 +1,7 @@
 package EstadosPedido;
 
+import PedidosClases.Pedido;
+
 public class ListoParaEntregar implements EstadoPedido {
     @Override
     public void cambiar(Pedido pedido) {

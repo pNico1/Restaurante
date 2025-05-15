@@ -1,5 +1,7 @@
 package EstadosPedido;
 
+import PedidosClases.Pedido;
+
 public class Entregado implements EstadoPedido {
     @Override
     public void cambiar(Pedido pedido) {
@@ -8,7 +10,7 @@ public class Entregado implements EstadoPedido {
 
     @Override
     public String getNombreEstado() {
-        return "EstadosPedido.Entregado";
+        return "Entregado";
     }
 }
 //chequeado

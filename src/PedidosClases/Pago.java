@@ -1,3 +1,5 @@
+package PedidosClases;
+
 public class Pago {
     private String metodo; // "Tarjeta de crédito" o "Tarjeta de débito"
     private String estado; // "Pendiente", "Aprobado", "Rechazado"

@@ -1,3 +1,5 @@
+package RestauranteClases;
+
 import java.util.List;
 
 public class Plato {

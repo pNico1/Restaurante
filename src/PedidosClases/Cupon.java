@@ -1,3 +1,5 @@
+package PedidosClases;
+
 public class Cupon {
     private String codigo;
     private double descuento; // porcentaje entre 0 y 1

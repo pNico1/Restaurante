@@ -1,5 +1,8 @@
 package Usuarios;
 
+import EstadosPedido.EnEspera;
+import PedidosClases.ModificadorPedido;
+
 public class Mesero extends Usuario {
     public Mesero(String nombre) {
         super(nombre);
@@ -7,8 +10,8 @@ public class Mesero extends Usuario {
 
     @Override
     public void modificarPedido(ModificadorPedido modificador) {
-        modificador.cambiarEstado();
+        if (modificador.getPedido().getEstado() instanceof EnEspera) {
+            modificador.cambiarEstado();
+        }
     }
-
-
 }

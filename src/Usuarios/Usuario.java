@@ -1,5 +1,7 @@
 package Usuarios;
 
+import PedidosClases.ModificadorPedido;
+
 public abstract class Usuario {
     protected String nombre;
 

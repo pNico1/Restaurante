@@ -1,12 +1,12 @@
-Categoria:
+RestauranteClases.Categoria:
     -obtenerPlatos() (atributo) --> +getPlatos  (metodo)
 
-Cupon:
+PedidosClases.Cupon:
     validarCupon --> isValido
 
-Pago:
+PedidosClases.Pago:
     validarCupon --> aplicarCupon
 
-Usuario:
+Usuarios.Usuario:
     modificarPedido --> agregarAlPedido, removerDelPedido
 

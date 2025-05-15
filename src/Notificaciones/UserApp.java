@@ -3,20 +3,20 @@ package Notificaciones;
 import EstadosPedido.Entregado;
 import PedidosClases.Pedido;
 
-public class Mail extends TipoMedioNotificaciones{
+public class UserApp extends TipoMedioNotificaciones{
 
-
-    public Mail(String nombreU) {
+    public UserApp(String nombreU) {
         super(nombreU);
     }
 
-    public String getEmail(){
-        return nombreU;
-    }
+    @Override
     public void notificar(Pedido pedido) {
         if (pedido.getEstado() instanceof Entregado) {
-            System.out.println("Envio a mail: " + nombreU);
+            System.out.println("Envio a usuario: " + nombreU);
             new Notificacion(pedido).notificarCliente();
         }
+    }
+    public String getUser(){
+        return nombreU;
     }
 }
