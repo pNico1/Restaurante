@@ -1,4 +1,4 @@
-package PedidosClases;
+package MetodosDePago;
 
 public class Cupon {
     private String codigo;
@@ -11,7 +11,7 @@ public class Cupon {
         this.valido = valido;
     }
 
-    public int aplicarDescuento(int total) {
+    public double aplicarDescuento(double total) {
         if (isValido()) {
             return (int)(total * (1 - descuento));
         }

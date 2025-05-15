@@ -1,3 +1,7 @@
+import MetodosDePago.Cupon;
+import MetodosDePago.MetodoDePago;
+import MetodosDePago.PagoTarjeta;
+import MetodosDePago.Tarjeta;
 import Notificaciones.Mail;
 import Notificaciones.NotificadorMesero;
 import PedidosClases.ModificadorPedido;
@@ -11,7 +15,11 @@ import TiposPedido.TakeAway;
 import Usuarios.Chef;
 import Usuarios.Cliente;
 import Usuarios.Mesero;
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Arrays;
+import java.util.Date;
 
 
 public class Main {
@@ -124,10 +132,18 @@ public class Main {
         resto1.consultarMenu();
 
         //creamos cliente y pedido
+        LocalDate localDate = LocalDate.of(2027, 2, 25); // Año, mes, día
+        Date fecha = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        Cupon cuponPedro=new Cupon("SNFO2OA987G",0.20,true);
+
+        BigInteger numTarjeta = new BigInteger("4027738194624582");
+
+        Tarjeta tarjetaPedro = new Tarjeta("Patagonia",numTarjeta,"Credito","Pedro","Sanchez",fecha);
+        MetodoDePago metodoPedro= new PagoTarjeta(tarjetaPedro);
+
         Cliente pedro = new Cliente("pedro",new Mail("pedro@gmail.com"), "1122662955");
-        System.out.println("a");
-        Pedido pedido = new Pedido(pedro, new TakeAway(), resto1);
-        System.out.println("b");
+        Pedido pedido = new Pedido(pedro, new TakeAway(), resto1, metodoPedro);
 
         pedido.agregarPlato(entrada1);
         pedido.agregarPlato(plato1);
@@ -144,6 +160,22 @@ public class Main {
         juan.modificarPedido(modificadorGaston);   // En preparación
         gaston.modificarPedido(modificadorGaston);   // Listo para entregar + listo para recoger en cocina/no hace nada si es el mozo
         gaston.modificarPedido(modificadorGaston);// Entregado
+
+        MetodoDePago metodoPedro2= new PagoTarjeta(tarjetaPedro, cuponPedro);
+
+        Pedido pedido2 = new Pedido(pedro, new Delivery(), resto1,metodoPedro2);
+
+        pedido2.agregarPlato(entrada2);
+        pedido2.agregarPlato(plato3);
+        pedido2.agregarPlato(postre2);
+
+        NotificadorMesero notificadorJuan2 = new NotificadorMesero(juan);
+        ModificadorPedido modificadorGaston2 = new ModificadorPedido(pedido2, notificadorJuan);
+        ModificadorPedido modificadorJuan2 = new ModificadorPedido(pedido2, notificadorJuan);
+
+        juan.modificarPedido(modificadorGaston2);       // En preparación
+        gaston.modificarPedido(modificadorGaston2);     // Listo para entregar + listo para recoger en cocina/no hace nada si es el mozo
+        gaston.modificarPedido(modificadorGaston2);     // Entregado
 
         resto1.generarReporteVentas();
     }

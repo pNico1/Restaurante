@@ -1,0 +1,15 @@
+15/05/2025 19:54:10 Orden Nº1
+Bruschettas de Tomate-----15
+Lomo Saltado-----35
+Tiramisú-----20
+
+Total: 70.0
+------------------------------
+15/05/2025 19:54:10 Orden Nº2
+Ceviche Clásico-----18
+Pollo al Curry-----30
+Helado de Vainilla-----14
+
+Cupon %20.0
+Total: 49.0
+------------------------------
