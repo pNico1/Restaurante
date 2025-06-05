@@ -6,6 +6,7 @@ public class EnPreparacion implements EstadoPedido {
     @Override
     public void cambiar(Pedido pedido) {
         pedido.setEstado(new ListoParaEntregar());
+        pedido.getNotificador().notificar();
     }
 
     @Override
