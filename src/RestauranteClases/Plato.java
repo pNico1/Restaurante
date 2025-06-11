@@ -8,12 +8,14 @@ public class Plato {
     private String descripcion;
     private int precio;
     private List<String> ingredientesAlergenicos;
+    private int tiempoEstimado;
 
-    public Plato(String nombre, String descripcion, int precio, List<String> ingredientesAlergenicos) { //Construcctor
+    public Plato(String nombre, String descripcion, int precio, List<String> ingredientesAlergenicos, int tiempoEstimado) { //Construcctor
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.ingredientesAlergenicos = ingredientesAlergenicos;
+        this.tiempoEstimado = tiempoEstimado;
     }
 
     //getters y setters
@@ -49,5 +51,11 @@ public class Plato {
         this.nombre = nombre;
     }
 
+    public int getTiempoEstimado() {
+        return tiempoEstimado;
+    }
 
+    public void setTiempoEstimado(int tiempoEstimado) {
+        this.tiempoEstimado = tiempoEstimado;
+    }
 }

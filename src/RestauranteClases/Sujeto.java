@@ -1,0 +1,19 @@
+package RestauranteClases;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Sujeto {
+    private List<Observer> observers = new ArrayList<>();
+
+    public void agregarObserver(Observer o) {
+        this.observers.add(o);
+    }
+
+    public void notificar(LocalDateTime hora) {
+        for(Observer o: observers) {
+            o.actualizarHora(hora);
+        }
+    }
+}

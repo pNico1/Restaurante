@@ -1,9 +1,6 @@
 package PedidosClases;
 
-import EstadosPedido.EnEspera;
-import EstadosPedido.EnPreparacion;
-import EstadosPedido.EstadoPedido;
-import EstadosPedido.ListoParaEntregar;
+import EstadosPedido.*;
 import MetodosDePago.MetodoDePago;
 import MetodosDePago.PagoEfectivo;
 import Notificaciones.Notificacion;
@@ -14,6 +11,8 @@ import RestauranteClases.Restaurante;
 import TiposPedido.TipoPedido;
 import Usuarios.Cliente;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +28,7 @@ public class Pedido {
     private MetodoDePago metodoDePago;
     private NotificadorMesero notificador;
     private Notificacion notificacion;
+    private LocalDateTime horaProgramada;
 
     public Pedido(Cliente cliente, TipoPedido tipoPedido, Restaurante restaurante, MetodoDePago metodoDePago, NotificadorMesero notificador, Notificacion notificacion) {
         this.numeroOrden = contador++;
@@ -43,9 +43,37 @@ public class Pedido {
         this.notificador = notificador;
     }
 
-    public void agregarPlato(Plato plato) {platos.add(plato);}
+    public Pedido(Cliente cliente, TipoPedido tipoPedido, Restaurante restaurante, MetodoDePago metodoDePago, NotificadorMesero notificador, Notificacion notificacion, LocalDateTime
+                  horaProgramada) {
+        this.numeroOrden = contador++;
+        this.tipoPedido = tipoPedido;
+        this.estado = new EnCreacion();
+        this.cliente = cliente;
+        this.medioNoti = cliente.getTipoMedioNotificaCiones();
+        this.restaurante = restaurante;
+        this.metodoDePago = metodoDePago;
+        this.notificacion = notificacion;
+        this.notificador = notificador;
+        this.horaProgramada = horaProgramada;
+    }
 
-    public void removerPlato(Plato plato) {platos.remove(plato);}
+    public void agregarPlato(Plato plato) {
+        if (estado instanceof EnCreacion || estado instanceof EnEspera) {
+            platos.add(plato);
+        }
+        else {
+            System.out.println("No se pueden agregar platos");
+        }
+    }
+
+    public void removerPlato(Plato plato) {
+        if (estado instanceof EnCreacion || estado instanceof EnEspera) {
+            platos.remove(plato);
+        }
+        else {
+            System.out.println("No se pueden agregar platos");
+        }
+    }
 
     public double calcularTotal() {
         double total=0;
@@ -60,25 +88,21 @@ public class Pedido {
     }
 
     public void cancelarPedido() {
-        if (estado instanceof EnEspera || estado instanceof EnPreparacion){
-            restaurante.getPedidos().remove(this);
-        }
-        else {
-            System.out.println("El pedido no se puede cancelar");
-        }
+        System.out.println(estado.cancelarPedido(this));
     }
 
-//    public int calcularTiempoRestante() {
-//        int tiempoRestante = 0;
-//        if (!(estado instanceof ListoParaEntregar)){
-//            List<Pedido> pedidos = restaurante.getPedidos();
-//            int cont = 0;
-//            for (Pedido p : pedidos){
-//                cont++;
-//            }
-//            tiempoRestante = (cont % 5) *20
+//    public int calculartiempoRestante(){
+//        if (estado instanceof EnEspera){
+//            return calcularTiempoRestanteEnEspera();
+//        }
+//        else if (estado instanceof EnPreparacion){
+//            return calculartiempoRestanteEnPreparacion();
+//        }
+//        else if (estado instanceof ListoParaEntregar){
+//            return 0;
 //        }
 //    }
+
 
     public MetodoDePago getMetodoDePago() {return metodoDePago;}
 
@@ -127,4 +151,12 @@ public class Pedido {
     public NotificadorMesero getNotificador() {return notificador;}
 
     public void setNotificador(NotificadorMesero notificador) {this.notificador = notificador;}
+
+    public Restaurante getRestaurante() {return restaurante;}
+
+    public void setRestaurante(Restaurante restaurante) {this.restaurante = restaurante;}
+
+    public LocalDateTime getHoraProgramada() {return horaProgramada;}
+
+    public void setHoraProgramada(LocalDateTime horaProgramada) {this.horaProgramada = horaProgramada;}
 }
