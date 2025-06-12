@@ -1,11 +1,13 @@
 package EstadosPedido;
 
 import PedidosClases.Pedido;
+import RestauranteClases.Plato;
 
 public class EnEspera implements EstadoPedido {
     @Override
     public void cambiar(Pedido pedido) {
         pedido.setEstado(new EnPreparacion());
+        pedido.getNotificacion().notificarCliente("en espera");
     }
 
     @Override
@@ -19,6 +21,10 @@ public class EnEspera implements EstadoPedido {
             tiempo++;
         }
         tiempo = (tiempo % 5) * 20;
+
+        for (Plato p : pedido.getPlatos()) {
+            tiempo = tiempo + p.getTiempoEstimado();
+        }
 
         return String.valueOf(tiempo);
     }

@@ -16,7 +16,7 @@ public class Mail extends TipoMedioNotificaciones{
     public void notificar(Pedido pedido) {
         if (pedido.getEstado() instanceof Entregado) {
             System.out.println("Envio a mail: " + nombreU);
-            new Notificacion(pedido).notificarCliente();
+            new Notificacion(pedido).notificarCliente(pedido.getEstado().getNombreEstado());
         }
     }
 }

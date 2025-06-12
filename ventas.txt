@@ -13,3 +13,48 @@ Helado de Vainilla-----14
 Cupon %20.0
 Total: 49.0
 ------------------------------
+12/06/2025 16:14:16 Orden Nº1
+Bruschettas-----5500
+Ensalada César-----8500
+Cheesecake de Frutos Rojos-----7500
+
+12/06/2025 16:18:20 Orden Nº1
+Bruschettas-----5500
+Ensalada César-----8500
+Cheesecake de Frutos Rojos-----7500
+
+Cupon %20.0
+Total: 17200.0
+------------------------------
+12/06/2025 16:33:45 Orden Nº1
+Bruschettas-----5500
+Ensalada César-----8500
+Cheesecake de Frutos Rojos-----7500
+
+Cupon %20.0
+Total: 17200.0
+------------------------------
+12/06/2025 16:33:45 Orden Nº2
+Empanadas de Carne-----6000
+Sopa de Mariscos-----14000
+Brownie con Helado-----8000
+
+Cupon %20.0
+Total: 22400.0
+------------------------------
+12/06/2025 17:04:55 Orden Nº1
+Bruschettas-----5500
+Ensalada César-----8500
+Cheesecake de Frutos Rojos-----7500
+
+Cupon %20.0
+Total: 17200.0
+------------------------------
+12/06/2025 17:04:55 Orden Nº2
+Empanadas de Carne-----6000
+Sopa de Mariscos-----14000
+Brownie con Helado-----8000
+
+Cupon %20.0
+Total: 22400.0
+------------------------------

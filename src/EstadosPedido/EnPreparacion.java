@@ -1,13 +1,15 @@
 package EstadosPedido;
 
 import PedidosClases.Pedido;
+import PedidosClases.PedidoMobile;
 import RestauranteClases.Plato;
+import RestauranteClases.Restaurante;
 
 public class EnPreparacion implements EstadoPedido {
     @Override
     public void cambiar(Pedido pedido) {
         pedido.setEstado(new ListoParaEntregar());
-        pedido.getNotificador().notificar();
+        pedido.getNotificacion().notificarCliente("en preparacion");
     }
 
     @Override

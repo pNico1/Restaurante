@@ -17,8 +17,12 @@ public class ModificadorPedido {
     public void cambiarEstado() {
         pedido.getEstado().cambiar(this.pedido);
 
-
         System.out.println("Pedido: " + pedido.getNumeroOrden() + " " + pedido.getEstado().getNombreEstado());
+
+    }
+
+    public void cambiarPedidoIgual(){
+
 
     }
     public Pedido getPedido() {

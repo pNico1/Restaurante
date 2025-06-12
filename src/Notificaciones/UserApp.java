@@ -13,7 +13,7 @@ public class UserApp extends TipoMedioNotificaciones{
     public void notificar(Pedido pedido) {
         if (pedido.getEstado() instanceof Entregado) {
             System.out.println("Envio a usuario: " + nombreU);
-            new Notificacion(pedido).notificarCliente();
+            new Notificacion(pedido).notificarCliente(pedido.getEstado().getNombreEstado());
         }
     }
     public String getUser(){

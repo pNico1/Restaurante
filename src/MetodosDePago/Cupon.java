@@ -12,10 +12,7 @@ public class Cupon {
     }
 
     public double aplicarDescuento(double total) {
-        if (isValido()) {
-            return (int)(total * (1 - descuento));
-        }
-        return total;
+        return (double)(total * (1 - descuento));
     }
 
     //getters y setters

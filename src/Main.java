@@ -4,19 +4,24 @@ import MetodosDePago.PagoTarjeta;
 import MetodosDePago.Tarjeta;
 import Notificaciones.Mail;
 import Notificaciones.NotificadorMesero;
+import Notificaciones.TipoMedioNotificaciones;
+import Notificaciones.UserApp;
 import PedidosClases.ModificadorPedido;
 import PedidosClases.Pedido;
+import PedidosClases.PedidoFactory;
 import RestauranteClases.Categoria;
 import RestauranteClases.Menu;
 import RestauranteClases.Plato;
 import RestauranteClases.Restaurante;
 import TiposPedido.Delivery;
+import TiposPedido.Rappi;
 import TiposPedido.TakeAway;
 import Usuarios.Chef;
 import Usuarios.Cliente;
 import Usuarios.Mesero;
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Date;
@@ -33,77 +38,95 @@ public class Main {
 
         //creacion de platos salados
         Plato plato1 = new Plato(
-                "Lomo Saltado",
-                "Tiras de res salteadas con cebolla, tomate y papas fritas, acompañado de arroz blanco.",
-                35,
-                Arrays.asList("soya", "gluten")
+                "Ensalada César",
+                "Ensalada con lechuga romana, pollo a la parrilla, crutones y aderezo César.",
+                8500,
+                Arrays.asList("Huevo", "Lácteos", "Anchoas"),
+                10
         );
 
         Plato plato2 = new Plato(
-                "Paella de Mariscos",
-                "Arroz cocinado con caldo de pescado, camarones, calamares, mejillones y azafrán.",
-                42,
-                Arrays.asList("mariscos")
+                "Hamburguesa Clásica",
+                "Carne de res con queso cheddar, lechuga, tomate, cebolla y pan artesanal.",
+                12000,
+                Arrays.asList("Gluten", "Lácteos", "Huevo"),
+                15
         );
 
         Plato plato3 = new Plato(
-                "Pollo al Curry",
-                "Pechuga de pollo cocida en salsa de curry con leche de coco y verduras.",
-                30,
-                Arrays.asList("lácteos")
+                "Sopa de Mariscos",
+                "Caldo de mariscos con camarones, calamares y mejillones.",
+                14000,
+                Arrays.asList("Mariscos"),
+                20
         );
 
         Plato plato4 = new Plato(
-                "Lasagna Boloñesa",
-                "Capas de pasta con carne molida, salsa de tomate y queso gratinado.",
-                38,
-                Arrays.asList("gluten", "lácteos", "huevo")
+                "Pizza Margarita",
+                "Pizza con salsa de tomate, mozzarella fresca y albahaca.",
+                11000,
+                Arrays.asList("Gluten", "Lácteos"),
+                18
         );
 
         Plato plato5 = new Plato(
-                "Tacos de Carnitas",
-                "Tortillas de maíz rellenas con cerdo desmenuzado, cebolla, cilantro y salsa verde.",
-                28,
-                Arrays.asList("gluten")
+                "Pasta Alfredo",
+                "Pasta con salsa cremosa de queso parmesano y mantequilla.",
+                13000,
+                Arrays.asList("Lácteos", "Gluten"),
+                17
         );
 
 
         //creacion entradas
         Plato entrada1 = new Plato(
-                "Bruschettas de Tomate",
-                "Pan tostado con tomate fresco, ajo, albahaca y aceite de oliva.",
-                15,
-                Arrays.asList("gluten")
+                "Bruschettas",
+                "Pan tostado con tomate, albahaca, ajo y aceite de oliva.",
+                5500,
+                Arrays.asList("Gluten"),
+                7
         );
 
         Plato entrada2 = new Plato(
-                "Ceviche Clásico",
-                "Pescado fresco marinado en jugo de limón con cebolla morada, cilantro y ají.",
-                18,
-                Arrays.asList("pescado")
+                "Empanadas de Carne",
+                "Empanadas horneadas rellenas de carne sazonada con especias.",
+                6000,
+                Arrays.asList("Gluten", "Huevo"),
+                10
         );
 
         Plato entrada3 = new Plato(
-                "Croquetas de Jamón",
-                "Croquetas crujientes rellenas de bechamel y trozos de jamón.",
-                16,
-                Arrays.asList("gluten", "lácteos")
+                "Tabla de Quesos",
+                "Selección de quesos artesanales con nueces y mermeladas.",
+                9500,
+                Arrays.asList("Lácteos", "Frutos secos"),
+                12
         );
 
 
         //creacion postres
         Plato postre1 = new Plato(
-                "Tiramisú",
-                "Postre italiano con capas de bizcocho de café, queso mascarpone y cacao en polvo.",
-                20,
-                Arrays.asList("gluten", "lácteos", "huevo")
+                "Cheesecake de Frutos Rojos",
+                "Tarta cremosa de queso con base de galleta y cobertura de frutos rojos.",
+                7500,
+                Arrays.asList("Lácteos", "Gluten", "Huevo"),
+                12
         );
 
         Plato postre2 = new Plato(
-                "Helado de Vainilla",
-                "Helado cremoso de vainilla natural servido con sirope de chocolate.",
-                14,
-                Arrays.asList("lácteos")
+                "Brownie con Helado",
+                "Brownie de chocolate caliente acompañado con helado de vainilla.",
+                8000,
+                Arrays.asList("Gluten", "Lácteos", "Huevo", "Frutos secos"),
+                10
+        );
+
+        Plato postre3 = new Plato(
+                "Flan Casero",
+                "Flan de huevo tradicional con caramelo y crema.",
+                6500,
+                Arrays.asList("Lácteos", "Huevo"),
+                8
         );
 
         //agregamos los platos a las categorias y estas al menu
@@ -142,20 +165,27 @@ public class Main {
         Tarjeta tarjetaPedro = new Tarjeta("Patagonia",numTarjeta,"Credito","Pedro","Sanchez",fecha);
         MetodoDePago metodoPedro= new PagoTarjeta(tarjetaPedro);
 
-        Cliente pedro = new Cliente("pedro",new Mail("pedro@gmail.com"), "1122662955");
-        Pedido pedido = new Pedido(pedro, new TakeAway(), resto1, metodoPedro);
+        metodoPedro.setCupon(cuponPedro);
 
-        pedido.agregarPlato(entrada1);
-        pedido.agregarPlato(plato1);
-        pedido.agregarPlato(postre1);
+        PedidoFactory pedidoFactory = new PedidoFactory();
+
+        Cliente pedro = new Cliente("pedro",new Mail("pedro@gmail.com"), "1122662955");
 
         Mesero juan = new Mesero("juan");
 
         NotificadorMesero notificadorJuan = new NotificadorMesero(juan);
-        ModificadorPedido modificadorGaston = new ModificadorPedido(pedido, notificadorJuan);
-        ModificadorPedido modificadorJuan = new ModificadorPedido(pedido, notificadorJuan);
 
-        Chef gaston = new Chef("Marcos");
+        Pedido pedido = pedidoFactory.createPedido(pedro, new Delivery(), new UserApp("Pedro"), resto1, metodoPedro, notificadorJuan);
+
+        ModificadorPedido modificadorGaston = new ModificadorPedido(pedido);
+        ModificadorPedido modificadorJuan = new ModificadorPedido(pedido);
+
+        Chef gaston = new Chef("Gaston");
+
+
+        pedido.agregarPlato(entrada1);
+        pedido.agregarPlato(plato1);
+        pedido.agregarPlato(postre1);
 
         juan.modificarPedido(modificadorGaston);   // En preparación
         gaston.modificarPedido(modificadorGaston);   // Listo para entregar + listo para recoger en cocina/no hace nada si es el mozo
@@ -163,20 +193,22 @@ public class Main {
 
         MetodoDePago metodoPedro2= new PagoTarjeta(tarjetaPedro, cuponPedro);
 
-        Pedido pedido2 = new Pedido(pedro, new Delivery(), resto1,metodoPedro2);
+        Pedido pedido2 = pedidoFactory.createPedido(pedro, new TakeAway(), new Mail("Pedro"),resto1, metodoPedro2, LocalDateTime.of(2025, 6, 13, 20,30));
 
         pedido2.agregarPlato(entrada2);
         pedido2.agregarPlato(plato3);
         pedido2.agregarPlato(postre2);
 
         NotificadorMesero notificadorJuan2 = new NotificadorMesero(juan);
-        ModificadorPedido modificadorGaston2 = new ModificadorPedido(pedido2, notificadorJuan);
-        ModificadorPedido modificadorJuan2 = new ModificadorPedido(pedido2, notificadorJuan);
+        ModificadorPedido modificadorGaston2 = new ModificadorPedido(pedido2);
+        ModificadorPedido modificadorJuan2 = new ModificadorPedido(pedido2);
 
-        juan.modificarPedido(modificadorGaston2);       // En preparación
+        juan.modificarPedido(modificadorGaston2);       // No es la hora programada
+        juan.modificarPedidoIgual(modificadorGaston2);  // Ignoramos el horario con tal de testear, en espera
+        pedido2.calcularTiempo();
+        gaston.modificarPedido(modificadorGaston2);     // En preparaciónListo para entregar + listo para recoger en cocina/no hace nada si es el mozo
         gaston.modificarPedido(modificadorGaston2);     // Listo para entregar + listo para recoger en cocina/no hace nada si es el mozo
         gaston.modificarPedido(modificadorGaston2);     // Entregado
 
-        resto1.generarReporteVentas();
     }
 }

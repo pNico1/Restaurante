@@ -1,5 +1,8 @@
 package MetodosDePago;
 
+import PedidosClases.Pedido;
+import RestauranteClases.Plato;
+
 public abstract class MetodoDePago {
     String nombre;
     Cupon cupon;
@@ -27,5 +30,13 @@ public abstract class MetodoDePago {
 
     public void setCupon(Cupon cupon) {
         this.cupon = cupon;
+    }
+
+    public double calcularTotal(Pedido pedido){
+        double total=0;
+        for (Plato p : pedido.getPlatos()) {
+            total += p.getPrecio();
+        }
+        return total;
     }
 }

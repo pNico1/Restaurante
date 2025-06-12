@@ -2,8 +2,8 @@ package TiposPedido;
 
 import java.util.*;
 
-public class Rappi extends Delivery{
-    int tiempo;
+public class Rappi{
+    private int tiempo;
 
     public Rappi() {
         Random rand = new Random();

@@ -10,8 +10,10 @@ public class Notificacion {
         this.pedido=pedido;
     }
 
-    public void notificarCliente() {
-        String mensaje = "";
+    public void notificarCliente(String mensaje) {
+
+        mensaje="Su pedido esta " + mensaje;
+
             if(pedido.tipoPedido() instanceof TakeAway){
                 if (pedido.getMedioNoti() instanceof UserApp){
                     System.out.println("Enviando notificacion a la aplicacion");
@@ -19,7 +21,7 @@ public class Notificacion {
                 else{
                     System.out.println("Enviando notificacion al mail");
                 }
-                mensaje="Listo para recoger " + pedido.getCliente().getNombre();
+
             }
             else{
                 if (pedido.getMedioNoti() instanceof UserApp){
@@ -28,7 +30,9 @@ public class Notificacion {
                 else {
                     System.out.println("Enviando notificacion al mail");
                 }
-                mensaje="Delivery en camino"+" " + pedido.getCliente().getNombre();
+                if (pedido.getEstado() instanceof Entregado) {
+                    mensaje = "Delivery en camino" + " " + pedido.getCliente().getNombre();
+                }
             }
         System.out.println(mensaje);
     }

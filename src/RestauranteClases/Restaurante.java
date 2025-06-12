@@ -29,29 +29,30 @@ public class Restaurante {
         }
     }
 
-    public void generarReporteVentas(){
+    public void generarReporteVentas(Pedido pedido) {
         try (FileWriter writer = new FileWriter("ventas.txt", true)) {
-            for (Pedido pedido : pedidos) {
-                if (pedido.getEstado() instanceof Entregado){       //Si el pedido no fue entregado no lo cuenta
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                    String fecha = LocalDateTime.now().format(format);
-                    writer.append(fecha+ " ");
-                    writer.append("Orden Nº" + String.valueOf(pedido.getNumeroOrden()) + '\n');
-                    for (Plato pl : pedido.getPlatos()){
-                        writer.append(pl.getNombre()+ "-----" + pl.getPrecio() + '\n');
-                    }
-                    writer.append('\n');
-                    if (pedido.getMetodoDePago().getCupon() != null) {
-                        writer.append("Cupon %" + pedido.getMetodoDePago().getCupon().getDescuento() * 100 + '\n');
-                    }
 
-                    writer.append("Total: " + pedido.calcularTotal() + '\n');
-                    writer.append("------------------------------");
-                    writer.append('\n');
-                }
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            String fecha = LocalDateTime.now().format(format);
+
+            writer.append(fecha+ " ");
+            writer.append("Orden Nº" + String.valueOf(pedido.getNumeroOrden()) + '\n');
+
+            for (Plato pl : pedido.getPlatos()){
+                writer.append(pl.getNombre()+ "-----" + pl.getPrecio() + '\n');
             }
-            pedidos.clear();
-        }catch (IOException e) {
+
+            writer.append('\n');
+
+            if (pedido.getMetodoDePago().getCupon() != null) {
+                writer.append("Cupon %" + pedido.getMetodoDePago().getCupon().getDescuento() * 100 + '\n');
+            }
+
+            writer.append("Total: " + pedido.calcularTotal() + '\n');
+            writer.append("------------------------------");
+            writer.append('\n');
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

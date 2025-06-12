@@ -14,4 +14,9 @@ public class Mesero extends Usuario {
             modificador.cambiarEstado();
         }
     }
+
+    public void modificarPedidoIgual(ModificadorPedido modificador) {
+        modificador.getPedido().setEstado(new EnEspera());
+        modificador.getPedido().getRestaurante().agregarPedido(modificador.getPedido());
+    }
 }
